@@ -132,6 +132,7 @@ class postgresql::globals (
   $postgis_version          = undef,
   $repo_proxy               = undef,
   $repo_baseurl             = undef,
+  $yum_repo_commonurl       = undef,
 
   $needs_initdb             = undef,
 
@@ -253,9 +254,10 @@ class postgresql::globals (
   # Setup of the repo only makes sense globally, so we are doing this here.
   if($manage_package_repo) {
     class { 'postgresql::repo':
-      version => $globals_version,
-      proxy   => $repo_proxy,
-      baseurl => $repo_baseurl,
+      version   => $globals_version,
+      proxy     => $repo_proxy,
+      baseurl   => $repo_baseurl,
+      commonurl => $yum_repo_commonurl,
     }
   }
 }
